@@ -8,30 +8,31 @@
 Console.WriteLine("enter text:");
 string text = Console.ReadLine();
 text = text.ToLower();  
-// konverterar till små bokstäver för att kunna jämnföra alla
+// konverterar till små bokstäver för att kunna jämnföra alla ord likvärdigt
 
-var value = text.Split(new[] {' ',','}, StringSplitOptions.RemoveEmptyEntries); 
-// splittar med "mellanslag" och "," samt tar bort tomma 
+var value = text.Split(new[] {' ', ',', '.'}, StringSplitOptions.RemoveEmptyEntries); 
+// splittar strängen 'mellanslag', ',' och '.' samt tar bort alla tomma entries ( mellanslag )
+// detta sparas i en array av substrängar
 
 Dictionary<string, int> RepeatedWordCount = new Dictionary<string, int>();
 
 for (int i = 0; i < value.Length; i++)
 {
     if (RepeatedWordCount.ContainsKey(value[i]))
-    //  koll ifall ordet finns i Dictionary, uppdaterar räkning
+    //  kontroll ifall ordet existerar i ordlistan, uppdaterar itterationen
     {
         RepeatedWordCount[value[i]]++;
     }
     else
-    //  om ordet inte finns i Dictionary, lägger vi till det här
+    //  om ordet inte finns iordlistan, lägger vi till det här
     {
         RepeatedWordCount.Add(value[i], 1);
     }
 }
 
 
-// Dictionary går inte att sortera som tex List, som har en .sort() metod
-// Så jag konverterar till List och gör en sortering av KeyValuePair
+// Dictionary går inte att sortera som tex. en List, som har en .sort() metod
+// Så jag konverterar till List och gör en enkel sortering av KeyValuePair 
 
 List<KeyValuePair<string, int>> SortedWordCount = RepeatedWordCount.ToList();
 
@@ -44,10 +45,10 @@ SortedWordCount.Sort(
 );
 
 var itemsHighestTen = SortedWordCount.Take(10);
+Console.WriteLine();
 
 foreach (KeyValuePair<string, int> kvp in itemsHighestTen)
 //  Visar alla keys (ordet) plus dess värde (frekvens)
 {
     Console.WriteLine($"{kvp.Key}: {kvp.Value}");
 }
-
