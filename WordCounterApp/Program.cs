@@ -5,7 +5,7 @@
  */
 
 
-Console.WriteLine("enter text:");
+Console.WriteLine("Enter text to analyse:");
 string text = Console.ReadLine();
 text = text.ToLower();  
 // konverterar till små bokstäver för att kunna jämnföra alla ord likvärdigt
@@ -24,7 +24,7 @@ for (int i = 0; i < value.Length; i++)
         RepeatedWordCount[value[i]]++;
     }
     else
-    //  om ordet inte finns iordlistan, lägger vi till det här
+    //  om ordet inte finns i ordlistan, lägger vi till det här
     {
         RepeatedWordCount.Add(value[i], 1);
     }
@@ -32,7 +32,7 @@ for (int i = 0; i < value.Length; i++)
 
 
 // Dictionary går inte att sortera som tex. en List, som har en .sort() metod
-// Så jag konverterar till List och gör en enkel sortering av KeyValuePair 
+// Så jag konverterar till List och gör en enkel sortering genom jämnförelse av KeyValuePair 
 
 List<KeyValuePair<string, int>> SortedWordCount = RepeatedWordCount.ToList();
 
